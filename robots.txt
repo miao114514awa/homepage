@@ -1,4 +1,4 @@
-# Robots.txt file from https://zy.culip.top
+# Robots.txt file from https://culip.top
 User-agent: *
 Disallow: /static/img/
 Disallow: /README.md
