@@ -24,6 +24,40 @@
 
 	<meta name="baidu-site-verification" content="codeva-EruKeWO4WC" />
 	<meta name="yandex-verification" content="bd01de5b3327c974" />
+	<style>
+		.toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%);
+        }
+        .toast.hide {
+            opacity: 0;
+            transform: translateX(-50%) translateY(-50px);
+        }
+        .close-toast {
+            margin-left: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -32,6 +66,11 @@
 		</div>
 	</div>
 	<div class="culip-filter"></div>
+
+	<div class="toast" id="toast">
+        欢迎你！来自远方的客人！
+        <span class="close-toast" id="closeToast">×</span>
+    </div>
 
 	<div class="culip-main">
 		<div class="culip-left">
@@ -85,9 +124,6 @@
 						<div>2023</div>
 					</li>
 				</ul>
-			</div>
-			<div class="left-div">
-                <span style="font-size:14px">欢迎！</span>
 			</div>
 		</div>
 		<div class="culip-right">
@@ -157,39 +193,30 @@
 							<p>免费的AI，就是不提供API</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/ai站.png" alt="AI站">
+							<img src="./static/img/ai.png" alt="AI站">
 						</div>
 
-					</a><a class="projectItem a" target="_blank" href="https://video.culip.top" onclick="alert('仅支持电脑端的链接解析哦'); return false;" >
+					</a><a class="projectItem a" target="_blank" href="https://video.culip.top">
 						<div class="projectItemLeft">
 							<h1>B站视频下载站</h1>
 							<p>仅供学习使用哦</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/B站视频下载站.png" alt="B站视频下载站">
+							<img src="./static/img/下载.png" alt="B站视频下载">
 						</div>
 
 					</a>
-					<a class="projectItem a" target="_blank" href="https://zy.culip.top">
+					<a class="projectItem a" target="_blank" href="https://home.culip.top">
 						<div class="projectItemLeft">
 							<h1>主页</h1>
-							<p>就是这里awa</p>
+							<p>就 是 这 里 ~</p>
 						</div>
 						<div class="projectItemRight">
 							<img src="./static/img/i4.png" alt="主页">
 						</div>
 
 					</a>
-					<a class="projectItem a" target="_blank" href="">
-						<div class="projectItemLeft">
-							<h1>Nav导航</h1>
-							<p>记录可以帮助人们更好的游玩mc的网站</p>
-						</div>
-						<div class="projectItemRight">
-							<img src="./static/img/导航.png" alt="导航">
-						</div>
 
-					</a>
 				</div>
 				<div class="title"><svg t="1720625514503" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6407" width="200" height="200"><path d="M512 243.328l-22.912 22.314667a32 32 0 0 0 45.824 0L512 243.328zM541.226667 213.333333l22.912 22.357334L541.226667 213.333333z m-58.453334 0l22.912-22.357333-22.912 22.357333z m-335.402666 331.093334l-23.765334 21.461333 23.765334-21.461333z m244.309333 270.421333l-23.722667 21.461333 23.722667-21.461333z m240.64 0l23.722667 21.461333-23.722667-21.461333z m244.309333-270.421333l23.765334 21.461333-23.765334-21.461333zM870.485333 213.333333l-22.912 22.357334 22.912-22.357334zM153.514667 213.333333l22.912 22.357334L153.514667 213.333333zM725.333333 245.333333a32 32 0 0 0 0 64v-64z m53.333334 117.333334a32 32 0 0 0 64 0h-64z m-243.754667-97.024l29.226667-29.952-45.824-44.714667-29.226667 29.994667 45.824 44.672z m-75.050667-29.952l29.226667 29.952 45.824-44.672-29.226667-29.994667-45.824 44.714667z m-336.213333 330.197333L367.914667 836.266667l47.488-42.922667-244.352-270.421333-47.488 42.922666zM656 836.266667l244.352-270.421334-47.488-42.922666-244.352 270.421333 47.488 42.922667z m191.530667-600.618667c76.672 78.592 79.061333 205.653333 5.333333 287.274667l47.488 42.922666c96.341333-106.666667 93.269333-272.042667-6.997333-374.912l-45.824 44.714667z m45.824-44.714667a260.736 260.736 0 0 0-375.04 0l45.781333 44.714667a196.736 196.736 0 0 1 283.434667 0l45.824-44.714667zM176.426667 235.690667a196.736 196.736 0 0 1 283.434666 0l45.824-44.714667a260.736 260.736 0 0 0-375.04 0l45.781334 44.714667zM367.957333 836.266667a193.28 193.28 0 0 0 288.085334 0l-47.488-42.922667a129.28 129.28 0 0 1-193.109334 0l-47.488 42.922667zM130.56 190.976c-100.266667 102.826667-103.338667 268.245333-6.997333 374.912l47.488-42.922667c-73.728-81.621333-71.338667-208.64 5.333333-287.274666L130.602667 190.976zM725.333333 309.333333c29.44 0 53.333333 23.893333 53.333334 53.333334h64A117.333333 117.333333 0 0 0 725.333333 245.333333v64z" p-id="6408" fill="#ffffff"></path></svg>喜欢 </div>
 				<div class="projectList">
@@ -214,18 +241,18 @@
 
 					</a><a class="projectItem b">
 						<div class="projectItemLeft">
-							<h1>deepseek</h1>
-							<p>Ai你~ ~ ~</p>
+							<h1>摄影</h1>
+							<p>摄影能不烧钱吗（</p>
 						</div>
 						<div class="projectItemRight">
-							<img src="./static/img/deepseek.png" alt="deepseek">
+							<img src="./static/img/摄影.png" alt="摄影">
 						</div>
 
 					</a>
 					<a class="projectItem b">
 						<div class="projectItemLeft">
 							<h1>小米</h1>
-							<p>最喜欢的公司之一</p>
+							<p>优秀的公司赚取利润</br>伟大的公司赢得人心</p>
 						</div>
 						<div class="projectItemRight" style="width:30%">
 							<img src="https://cdn.cnbj1.fds.api.mi-img.com/s02.mifile.cn/assets/static/image/logo-mi2.png" alt="小米">
@@ -239,7 +266,43 @@
 
 					</a></div>
 			
-			
+				<div class="title"><svg t="1756132014430" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5096" width="200" height="200"><path d="M469.333 213.333v-42.666a42.667 42.667 0 0 1 85.334 0v42.666H768A170.667 170.667 0 0 1 938.667 384v384a85.333 85.333 0 0 1-85.334 85.333H823.34a170.667 170.667 0 0 1-97.75-30.72c-92.842-64.853-164.01-97.28-213.589-97.28-49.579 0-120.747 32.427-213.59 97.28a170.667 170.667 0 0 1-97.706 30.72h-30.037A85.333 85.333 0 0 1 85.333 768V384A170.667 170.667 0 0 1 256 213.333h213.333zM256 298.667A85.333 85.333 0 0 0 170.667 384v384h29.994a85.333 85.333 0 0 0 48.896-15.36C355.584 678.528 440.277 640 512 640c71.765 0 156.416 38.528 262.443 112.64A85.333 85.333 0 0 0 823.339 768h29.994V384A85.333 85.333 0 0 0 768 298.667H256zM384 448h42.667a42.667 42.667 0 0 1 0 85.333H384V576a42.667 42.667 0 0 1-85.333 0v-42.667H256A42.667 42.667 0 0 1 256 448h42.667v-42.667a42.667 42.667 0 1 1 85.333 0V448z m298.667-85.333a42.667 42.667 0 1 1 0 85.333 42.667 42.667 0 0 1 0-85.333zM597.333 448a42.667 42.667 0 1 1 0 85.333 42.667 42.667 0 0 1 0-85.333zM768 448a42.667 42.667 0 1 1 0 85.333A42.667 42.667 0 0 1 768 448z m-85.333 85.333a42.667 42.667 0 1 1 0 85.334 42.667 42.667 0 0 1 0-85.334z" p-id="5097"></path></svg>游戏 </div>
+				<div class="projectList">
+					<a class="projectItem b">
+						<div class="projectItemLeft">
+							<h1>蔚蓝档案</h1>
+							<p>我玩的二游里面最好的一个 就是抽卡……</p>
+						</div>
+						<div class="projectItemRight">
+							<img src="./static/img/蔚蓝档案.png" alt="蔚蓝档案">
+						</div>
+
+					</a><a class="projectItem b">
+						<div class="projectItemLeft">
+							<h1>崩坏 • 星穹铁道</h1>
+							<p>小浣熊~（抽卡比上一个还要……）</p>
+						</div>
+						<div class="projectItemRight">
+							<img src="./static/img/崩铁.png" alt="崩铁" style="border-radius: 15px;">
+						</div>
+
+					</a>
+					<a class="projectItem b">
+						<div class="projectItemLeft">
+							<h1>Minecraft</h1>
+							<p>全世界最棒的沙盒游戏 没有之一</p>
+						</div>
+						<div class="projectItemRight">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-label="Minecraft" role="img" viewBox="-51.2 -51.2 614.40 614.40" stroke-linecap="square" fill="none" width="200px" height="200px" stroke="#000000" stroke-width="0.512"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="512" height="512" rx="15%" fill="#111"></rect> <g id="a" transform="matrix(19 11 0 22 76 142)"> <path fill="#432" d="M.5.5h9v9h-9"></path> <path stroke="#864" d="M2 8v1h2V8h5V7 H7V5"></path> <path stroke="#643" d="M1 5zM2 9zM1 8V7h2V6h1M5 9h2V8H6V4M7 6h1v1M9 9zM9 4v1"></path> <path stroke="#a75" d="M1 7h1M4 7h1M9 6z"></path> <path stroke="#555" d="M5 5z"></path> <path stroke="#593" d="M4 4V1h4v2H7V2H4v1H2v1"></path> <path stroke="#6a4" d="M2 1h1M6 1zM7 2zM9 1v1"></path> <path stroke="#7c5" d="M5 3zM3 2h1"></path> <path stroke="#9c6" d="M1 1v1h1M8 1z"></path> </g> <use xlink:href="#a" transform="matrix(-1 0 0 1 513 0)" opacity=".5"></use> <g transform="matrix(-19 11-19-11 447 159)"> <path fill="#7b4" d="M.5.5h9v9h-9"></path> <path stroke="#8c5" d="M1 1zM3 1zM4 7zM3 4v2H1v2h3v1h2V7M2 3h4V1H5v1h3M7 4v1H4M9 4v2H8v3"></path> <path stroke="#ad7" d="M1 3v2M1 7zM1 9zM3 3zM4 4zM5 1zM5 3zM5 5v1M5 8v1M7 2v1M8 7h1"></path> </g> </g></svg>
+						</div>
+
+					</a><a class="projectItem b">
+						<div class="projectItemLeft" style="width:100%">
+							<h1>其他的</h1>
+							<p style="margin-top: 0px">Emmm 容我想想</p>
+						</div>
+
+					</a></div>
 				<div class="title">
 					<svg t="1705257823317" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7833" >
                         <path d="M395.765333 586.570667h-171.733333c-22.421333 0-37.888-22.442667-29.909333-43.381334L364.768 95.274667A32 32 0 0 1 394.666667 74.666667h287.957333c22.72 0 38.208 23.018667 29.632 44.064l-99.36 243.882666h187.050667c27.509333 0 42.186667 32.426667 24.042666 53.098667l-458.602666 522.56c-22.293333 25.408-63.626667 3.392-54.976-29.28l85.354666-322.421333zM416.714667 138.666667L270.453333 522.581333h166.869334a32 32 0 0 1 30.933333 40.181334l-61.130667 230.954666 322.176-367.114666H565.312c-22.72 0-38.208-23.018667-29.632-44.064l99.36-243.882667H416.714667z"  p-id="7834"></path>
@@ -309,7 +372,7 @@
 					<div class="projectItemRight">
 						<img src="./static/img/python.png" alt="Python">
 					</div>
-
+<!-- 
 				</a><a class="projectItem b">
 					<div class="projectItemLeft">
 						<h1>PHP</h1>
@@ -317,21 +380,12 @@
 					</div>
 					<div class="projectItemRight">
 						<img src="./static/img/php.png" alt="PHP">
-					</div>
-
-				</a><a class="projectItem b">
-					<div class="projectItemLeft">
-						<h1>Java</h1>
-						<p>进度：<span class="purpleText textBackground">0.1%</span></p>
-					</div>
-					<div class="projectItemRight">
-						<img src="./static/img/java.png" alt="Java">
-					</div>
+					</div> -->
 
 				</a><a class="projectItem b">
 					<div class="projectItemLeft">
 						<h1>C++</h1>
-						<p>进度：<span class="purpleText textBackground">10%</span></p>
+						<p>进度：<span class="purpleText textBackground">20%</span></p>
 					</div>
 					<div class="projectItemRight">
 						<img src="./static/img/c++.png" alt="C++">
@@ -340,7 +394,7 @@
 				</a><a class="projectItem b">
 					<div class="projectItemLeft">
 						<h1>HTML</h1>
-						<p>进度：<span class="purpleText textBackground">30%</span></p>
+						<p>进度：<span class="purpleText textBackground">49%</span></p>
 					</div>
 					<div class="projectItemRight">
 						<img src="./static/img/html.jpg" alt="HTML">
@@ -348,26 +402,8 @@
 
 				</a><a class="projectItem b">
 					<div class="projectItemLeft">
-						<h1>Bootstrap</h1>
-						<p>进度：<span class="purpleText textBackground">0%</span></p>
-					</div>
-					<div class="projectItemRight">
-						<img src="./static/img/bootstrap.png" alt="Bootstrap">
-					</div>
-
-				</a><a class="projectItem b">
-					<div class="projectItemLeft">
-						<h1>Vue</h1>
-						<p>进度：<span class="purpleText textBackground">0%</span></p>
-					</div>
-					<div class="projectItemRight">
-						<img src="./static/img/Vue.png" alt="Vue">
-					</div>
-
-				</a><a class="projectItem b">
-					<div class="projectItemLeft">
 						<h1>爬虫</h1>
-						<p>进度：<span class="purpleText textBackground">10%</span></p>
+						<p>进度：<span class="purpleText textBackground">25%</span></p>
 					</div>
 					<div class="projectItemRight">
 						<img src="./static/img/爬虫.png" alt="爬虫">
@@ -386,10 +422,10 @@
     				<div class="description" style="align-items: center;display: flex;color:#fff;margin-bottom:5px;margin-top:20px"><svg t="1720627505239" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19769" width="24"><path d="M725.333333 42.666667c46.933333 0 85.333333 38.4 85.333334 85.333333v768c0 46.933333-38.4 85.333333-85.333334 85.333333H298.666667c-46.933333 0-85.333333-38.4-85.333334-85.333333V128c0-46.933333 38.4-85.333333 85.333334-85.333333h426.666666z m-42.666666 85.333333H341.333333c-21.333333 0-38.4 17.066667-42.666666 38.4V853.333333c0 21.333333 17.066667 38.4 38.4 42.666667H682.666667c21.333333 0 38.4-17.066667 42.666666-38.4V170.666667c0-25.6-17.066667-42.666667-42.666666-42.666667z m-64 682.666667c12.8 0 21.333333 8.533333 21.333333 21.333333s-8.533333 21.333333-21.333333 21.333333h-213.333334c-12.8 0-21.333333-8.533333-21.333333-21.333333s8.533333-21.333333 21.333333-21.333333h213.333334z" p-id="19770" fill="#ffffff"></path></svg><s><strong>&nbsp;Redmi Note 9 4G</strong></s> <s style="color: rgb(117, 163, 31);"><span class="purpleText textBackground">6+128G</span></s> <s style="color: rgb(117, 163, 31);"><span class="purpleText textBackground">灰色</span></div></s>
     				<span style="font-size:15px;padding-left:5px">多么好的一台机器，只是可惜主板烧掉了，所以卖闲鱼了ww</span>
     				
-    				<div class="description" style="align-items: center;display: flex;color:#fff;margin-bottom:5px;margin-top:20px"><svg t="1720627931846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="22013" width="24" height="24"><path d="M906.666667 881.493333h-789.333334c-41.173333 0-74.666667-33.493333-74.666666-74.666666V214.826667c0-41.173333 33.493333-74.666667 74.666666-74.666667h789.333334c41.173333 0 74.666667 33.493333 74.666666 74.666667v592c0 41.173333-33.493333 74.666667-74.666666 74.666666zM117.333333 204.16c-5.973333 0-10.666667 4.693333-10.666666 10.666667v592c0 5.973333 4.693333 10.666667 10.666666 10.666667h789.333334c5.973333 0 10.666667-4.693333 10.666666-10.666667V214.826667c0-5.973333-4.693333-10.666667-10.666666-10.666667h-789.333334z" p-id="22014" fill="#ffffff"></path><path d="M564.266667 763.52h-104.32c-17.706667 0-32-14.293333-32-32s14.293333-32 32-32h104.32c17.706667 0 32 14.293333 32 32s-14.506667 32-32 32z" p-id="22015" fill="#ffffff"></path></svg><strong>&nbsp;Orange Pi 5 Pro</strong> <span class="purpleText textBackground">4+64G</span> <span class="purpleText textBackground">带散热片</span> </div>
+    				<div class="description" style="align-items: center;display: flex;color:#fff;margin-bottom:5px;margin-top:20px"><svg t="1720627931846" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="22013" width="24" height="24"><path d="M906.666667 881.493333h-789.333334c-41.173333 0-74.666667-33.493333-74.666666-74.666666V214.826667c0-41.173333 33.493333-74.666667 74.666666-74.666667h789.333334c41.173333 0 74.666667 33.493333 74.666666 74.666667v592c0 41.173333-33.493333 74.666667-74.666666 74.666667zM117.333333 204.16c-5.973333 0-10.666667 4.693333-10.666666 10.666667v592c0 5.973333 4.693333 10.666667 10.666666 10.666667h789.333334c5.973333 0 10.666667-4.693333 10.666666-10.666667V214.826667c0-5.973333-4.693333-10.666667-10.666666-10.666667h-789.333334z" p-id="22014" fill="#ffffff"></path><path d="M564.266667 763.52h-104.32c-17.706667 0-32-14.293333-32-32s14.293333-32 32-32h104.32c17.706667 0 32 14.293333 32 32s-14.506667 32-32 32z" p-id="22015" fill="#ffffff"></path></svg><strong>&nbsp;Orange Pi 5 Pro</strong> <span class="purpleText textBackground">4+64G</span> <span class="purpleText textBackground">带散热片</span> </div>
     				<span style="font-size:15px;padding-left:5px">小巧精悍 拿来本地测试部署项目最适合不过了</span>
     				
-    				<div class="description" style="align-items: center;display: flex;color:#fff;margin-bottom:5px;margin-top:20px"><svg t="1720628141171" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="24691" width="24" height="24"><path d="M57.6 89.6h915.2c19.2 0 38.4 19.2 38.4 38.4v659.2c0 19.2-19.2 38.4-38.4 38.4H550.4V876.8h211.2c12.8 0 25.6 12.8 25.6 25.6s-12.8 25.6-25.6 25.6H262.4c-12.8 0-25.6-12.8-25.6-25.6s12.8-25.6 25.6-25.6h211.2V825.6H57.6c-19.2 0-38.4-19.2-38.4-38.4V128c0-25.6 12.8-38.4 38.4-38.4zM864 640c-19.2 0-38.4 19.2-38.4 38.4s19.2 38.4 38.4 38.4 38.4-19.2 38.4-38.4c0-25.6-19.2-38.4-38.4-38.4z m70.4-473.6H96v582.4h838.4V166.4z" fill="#ffffff" p-id="24692"></path></svg><strong>&nbsp;联想 G405S</strong> <span class="purpleText textBackground">8+300GB and 128GB</span> <span class="purpleText textBackground">A10-5750M and Radeon HD-8570M 2GB</span></div>
+    				<div class="description" style="align-items: center;display: flex;color:#fff;margin-bottom:5px;margin-top:20px"><svg t="1720627505239" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="19769" width="24"><path d="M725.333333 42.666667c46.933333 0 85.333333 38.4 85.333334 85.333333v768c0 46.933333-38.4 85.333333-85.333334 85.333333H298.666667c-46.933333 0-85.333333-38.4-85.333334-85.333333V128c0-46.933333 38.4-85.333333 85.333334-85.333333h426.666666z m-42.666666 85.333333H341.333333c-21.333333 0-38.4 17.066667-42.666666 38.4V853.333333c0 21.333333 17.066667 38.4 38.4 42.666667H682.666667c21.333333 0 38.4-17.066667 42.666666-38.4V170.666667c0-25.6-17.066667-42.666667-42.666666-42.666667z m-64 682.666667c12.8 0 21.333333 8.533333 21.333333 21.333333s-8.533333 21.333333-21.333333 21.333333h-213.333334c-12.8 0-21.333333-8.533333-21.333333-21.333333s8.533333-21.333333 21.333333-21.333333h213.333334z" p-id="19770" fill="#ffffff"></path></svg><strong>&nbsp;联想 G405S</strong> <span class="purpleText textBackground">8+300GB and 128GB</span> <span class="purpleText textBackground">A10-5750M and Radeon HD-8570M 2GB</span></div>
     				<span style="font-size:15px;padding-left:5px">已经不经常用了，但是还是得再买一台，我总不能带着台式机天天跑啊 ( •̀ ω •́ )✧</span>
     				
     				
@@ -442,6 +478,31 @@
 				document.body.classList.add('dark-mode');
 			}
 		}
+
+		// Toast 弹窗逻辑
+		var toast = document.getElementById('toast');
+		var closeBtn = document.getElementById('closeToast');
+		if (toast) {
+			// 显示弹窗
+			toast.classList.add('show');
+			// 3秒后自动关闭
+			var toastTimer = setTimeout(function() {
+				toast.classList.remove('show');
+				toast.classList.add('hide');
+			}, 3000);
+			// 点击X关闭
+			closeBtn.onclick = function() {
+				toast.classList.remove('show');
+				toast.classList.add('hide');
+				clearTimeout(toastTimer);
+			};
+			// 关闭后移除hide类，防止再次显示有问题
+			toast.addEventListener('transitionend', function() {
+				if (toast.classList.contains('hide')) {
+					toast.style.display = 'none';
+				}
+			});
+		}
 	});
 </script>
 
@@ -485,6 +546,31 @@
 			if (!switchInput.checked) {
 				document.body.classList.add('dark-mode');
 			}
+		}
+
+		// Toast 弹窗逻辑
+		var toast = document.getElementById('toast');
+		var closeBtn = document.getElementById('closeToast');
+		if (toast) {
+			// 显示弹窗
+			toast.classList.add('show');
+			// 3秒后自动关闭
+			var toastTimer = setTimeout(function() {
+				toast.classList.remove('show');
+				toast.classList.add('hide');
+			}, 3000);
+			// 点击X关闭
+			closeBtn.onclick = function() {
+				toast.classList.remove('show');
+				toast.classList.add('hide');
+				clearTimeout(toastTimer);
+			};
+			// 关闭后移除hide类，防止再次显示有问题
+			toast.addEventListener('transitionend', function() {
+				if (toast.classList.contains('hide')) {
+					toast.style.display = 'none';
+				}
+			});
 		}
 	});
 </script>
