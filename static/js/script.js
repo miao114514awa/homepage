@@ -1,12 +1,3 @@
-console.log('%cCopyright © 2024 zyyo.net',
-    'background-color: #ff00ff; color: white; font-size: 24px; font-weight: bold; padding: 10px;'
-);
-console.log('%c   /\\_/\\', 'color: #8B4513; font-size: 20px;');
-console.log('%c  ( o.o )', 'color: #8B4513; font-size: 20px;');
-console.log(' %c  > ^ <', 'color: #8B4513; font-size: 20px;');
-console.log('  %c /  ~ \\', 'color: #8B4513; font-size: 20px;');
-console.log('  %c/______\\', 'color: #8B4513; font-size: 20px;');
-
 document.addEventListener('contextmenu', function (event) {
     event.preventDefault();
 });
@@ -101,19 +92,9 @@ function getCookie(name) {
 
 document.addEventListener('DOMContentLoaded', function () {
 
-
-
-
-
-
     var html = document.querySelector('html');
     var themeState = getCookie("themeState") || "Light";
     var tanChiShe = document.getElementById("tanChiShe");
-
-
-
-
-
 
     function changeTheme(theme) {
         tanChiShe.src = "./static/svg/snake-" + theme + ".svg";
@@ -121,12 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
         setCookie("themeState", theme, 365);
         themeState = theme;
     }
-
-
-
-
-
-
 
     var Checkbox = document.getElementById('myonoffswitch')
     Checkbox.addEventListener('change', function () {
@@ -139,37 +114,24 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-
     if (themeState == "Dark") {
         Checkbox.checked = false;
     }
 
     changeTheme(themeState);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
-
     var fpsElement = document.createElement('div');
     fpsElement.id = 'fps';
     fpsElement.style.zIndex = '10000';
     fpsElement.style.position = 'fixed';
-    fpsElement.style.left = '0';
+    fpsElement.style.top = '10px';
+    fpsElement.style.right = '10px';
+    fpsElement.style.backgroundColor = 'rgba(172, 26, 26, 0.7)';
+    fpsElement.style.color = 'white';
+    fpsElement.style.padding = '5px 10px';
+    fpsElement.style.borderRadius = '5px';
+    fpsElement.style.fontFamily = 'Arial, sans-serif';
+    fpsElement.style.fontSize = '12px';
     document.body.insertBefore(fpsElement, document.body.firstChild);
 
     var showFPS = (function () {
@@ -205,13 +167,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         step();
     })();
-    
-    
-    
+
     //pop('./static/img/tz.jpg')
-    
-    
-    
+
 });
 
 
