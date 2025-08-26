@@ -67,8 +67,8 @@
 	</div>
 	<div class="culip-filter"></div>
 
-	<div class="toast" id="toast">
-        欢迎你！来自远方的客人！
+	<div class="toast" id="toast" style="text-align: center;">
+        欢迎你！</br>来自远方的客人！
         <span class="close-toast" id="closeToast">×</span>
     </div>
 
@@ -508,6 +508,93 @@
 
 <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
 <script>LA.init({id:"KV2mKKcOsR2WCJI0",ck:"KV2mKKcOsR2WCJI0"})</script>
+<script>
+(function () {
+  function injectStyle() {
+    if (document.getElementById('coin-rain-style')) return;
+    var style = document.createElement('style');
+    style.id = 'coin-rain-style';
+    style.textContent = ''
+      + '.coin-rain-container{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;overflow:hidden;z-index:99999;}'
+      + '.coin{position:absolute;top:-40px;width:16px;height:16px;'
+      + 'background-image:url(./static/img/金币.png);background-size:contain;background-repeat:no-repeat;background-position:center;'
+      + 'box-shadow:0 0 6px rgba(255,215,0,.7),inset 0 0 3px rgba(255,255,255,.6);opacity:.95;will-change:transform;}'
+      + '@keyframes coin-fall{to{transform:translate3d(var(--x-offset,0px),110vh,0) rotate(var(--rot,720deg));opacity:.9;}}';
+    document.head.appendChild(style);
+  }
+
+  function startCoinRain(duration) {
+    injectStyle();
+    var old = document.getElementById('coin-rain-container');
+    if (old) old.remove();
+    var container = document.createElement('div');
+    container.id = 'coin-rain-container';
+    container.className = 'coin-rain-container';
+    document.body.appendChild(container);
+
+    function spawn() {
+      var coin = document.createElement('div');
+      coin.className = 'coin';
+      var size = 12 + Math.random() * 14;
+      coin.style.width = size + 'px';
+      coin.style.height = size + 'px';
+      coin.style.left = (Math.random() * 100) + 'vw';
+      coin.style.setProperty('--x-offset', (Math.random() * 200 - 100) + 'px');
+      coin.style.setProperty('--rot', (360 + Math.random() * 720) + 'deg');
+      var dur = 2200 + Math.random() * 1600;
+      coin.style.animation = 'coin-fall ' + dur + 'ms linear forwards';
+      container.appendChild(coin);
+      coin.addEventListener('animationend', function () {
+        coin.remove();
+      });
+    }
+
+    var interval = setInterval(spawn, 50); // 20 个/秒
+    setTimeout(function () {
+      clearInterval(interval);
+      setTimeout(function () {
+        container.remove();
+      }, 5000); // 留时间让最后一批落完
+    }, duration || 3000);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    // 精确定位“喜欢”分区中标题为“摄影”的卡片
+    var targetLink = Array.from(document.querySelectorAll('a.projectItem.b')).find(function (a) {
+      var h1 = a.querySelector('h1');
+      var img = a.querySelector('img');
+      var hitTitle = h1 && h1.textContent && h1.textContent.trim().indexOf('摄影') !== -1;
+      var hitAlt = img && img.alt && img.alt.indexOf('摄影') !== -1;
+      return hitTitle || hitAlt;
+    });
+
+    if (!targetLink) return;
+
+    targetLink.addEventListener('click', function (e) {
+      if (targetLink.__coinRunning) return;
+      targetLink.__coinRunning = true;
+      setTimeout(function () { targetLink.__coinRunning = false; }, 3200);
+
+      var href = targetLink.getAttribute('href');
+      var tgt = targetLink.getAttribute('target');
+      var hasHref = href && href !== 'javascript:void(0)' && href !== '#';
+
+      if (hasHref) e.preventDefault();
+      startCoinRain(3000);
+
+      if (hasHref) {
+        setTimeout(function () {
+          if (tgt === '_blank') {
+            window.open(href, '_blank');
+          } else {
+            window.location.href = href;
+          }
+        }, 3000);
+      }
+    }, { passive: false });
+  });
+})();
+</script>
 
 </html>
 	</div>
