@@ -54,6 +54,17 @@
 			opacity: 0;
 			transform: translateX(-50%) translateY(-18px);
 		}
+
+		/* Site uptime badge */
+		.site-uptime {
+			font-size: 13px;
+			color: var(--main_text_color, #fff);
+			background: rgba(0,0,0,0.25);
+			padding: 6px 10px;
+			border-radius: 8px;
+			display: inline-block;
+			margin-left: 12px;
+		}
 		.close-toast {
 			margin-left: 15px;
 			cursor: pointer;
@@ -104,7 +115,7 @@
     </style>
 </head>
 
-<body>
+<body data-site-start="2024-06-19">
 	<div id="culip-loading">
 		<div id="culip-loading-center">
 		</div>
@@ -125,8 +136,9 @@
 				<div class="left-des-item"><svg t="1705773709627" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1478"><path d="M512 249.976471c-99.388235 0-180.705882 81.317647-180.705882 180.705882s81.317647 180.705882 180.705882 180.705882 180.705882-81.317647 180.705882-180.705882-81.317647-180.705882-180.705882-180.705882z m0 301.17647c-66.258824 0-120.470588-54.211765-120.470588-120.470588s54.211765-120.470588 120.470588-120.470588 120.470588 54.211765 120.470588 120.470588-54.211765 120.470588-120.470588 120.470588z" p-id="1479"></path><path d="M512 39.152941c-216.847059 0-391.529412 174.682353-391.529412 391.529412 0 349.364706 391.529412 572.235294 391.529412 572.235294s391.529412-222.870588 391.529412-572.235294c0-216.847059-174.682353-391.529412-391.529412-391.529412z m0 891.482353C424.658824 873.411765 180.705882 686.682353 180.705882 430.682353c0-183.717647 147.576471-331.294118 331.294118-331.294118s331.294118 147.576471 331.294118 331.294118c0 256-243.952941 442.729412-331.294118 499.952941z" p-id="1480"></path></svg>
 			内蒙古-呼和浩特市
 				</div>
-				<div class="left-des-item"><svg t="1705773906032" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2474"><path d="M729.6 234.666667H294.4V157.866667a51.2 51.2 0 0 1 51.2-51.2h332.8a51.2 51.2 0 0 1 51.2 51.2v76.8z m179.2 51.2a51.2 51.2 0 0 1 51.2 51.2v512a51.2 51.2 0 0 1-51.2 51.2H115.2a51.2 51.2 0 0 1-51.2-51.2v-512a51.2 51.2 0 0 1 51.2-51.2h793.557333z m-768 172.032c0 16.384 13.312 29.696 29.696 29.696h683.008a29.696 29.696 0 1 0 0-59.392H170.410667a29.696 29.696 0 0 0-29.696 29.696z m252.416 118.784c0 16.384 13.312 29.696 29.696 29.696h178.176a29.696 29.696 0 1 0 0-59.392H422.912a29.738667 29.738667 0 0 0-29.696 29.696z" p-id="2475"></path></svg>
-			初中生</div>
+				
+				<div class="left-des-item"><svg t="1763733944541" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2018" width="11" height="15"><path d="M533.333333 96c229.76 0 416 186.24 416 416S763.093333 928 533.333333 928 117.333333 741.76 117.333333 512 303.573333 96 533.333333 96z m0 64C338.922667 160 181.333333 317.589333 181.333333 512S338.922667 864 533.333333 864 885.333333 706.410667 885.333333 512 727.744 160 533.333333 160z m32 116.608v220.992l163.2 144.554667-42.410666 47.893333-184.789334-163.626667v-249.813333h64z" fill="#1677FF" p-id="2019"></path></svg>
+				<div id="site-uptime" class="site-uptime" aria-live="polite"></div></div>
 			</div>
 			<div class="left-div left-tag">
 				<div class="left-tag-item">Python
@@ -179,7 +191,7 @@
 					Hello. <span class="gradientText">I am 
 						Culip . </span>
 				</div>
-				<div class="description">😅 <span class="purpleText">半成品</span> Photographer
+				<div class="description">😅 <span class="purpleText">半成品</span> Photographer（50%）
 				</div>
 				<div class="description">🎉 <strong>I am a junior high school student</strong> &nbsp;&nbsp; <strong style="color: aqua;">|</strong> &nbsp;&nbsp; <strong>没人知道<span class="purpleText textBackground"> 未来 </span>是什么样子的</strong></div>
 
@@ -189,6 +201,10 @@
                             <path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"  p-id="2488"></path>
                         </svg>
 						<div class="iconTip">Github</div>
+					</a>
+					<a class="iconItem" onclick="" href="https://space.bilibili.com/3493131597122430" target="_blank">
+						<svg t="1763733325172" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8176" width="22" height="22"><path d="M768.0256 1024h-512a256.3072 256.3072 0 0 1-256-256V256a256.3072 256.3072 0 0 1 256-256h512a256.3072 256.3072 0 0 1 256 256v512a256.3072 256.3072 0 0 1-256 256zM352.0512 365.4912a96.1024 96.1024 0 0 0-96 96v192a96.1024 96.1024 0 0 0 96 95.9744h320a96.1024 96.1024 0 0 0 96-95.9744v-192a96.1024 96.1024 0 0 0-96-96h-29.9776l29.2608-29.2608a31.7696 31.7696 0 0 0 9.3696-22.6048 31.7952 31.7952 0 0 0-9.3696-22.6304 31.8464 31.8464 0 0 0-22.6304-9.3696 31.7696 31.7696 0 0 0-22.6048 9.3696l-67.9168 67.8656a31.104 31.104 0 0 0-5.12 6.6304h-82.2016a30.8736 30.8736 0 0 0-5.12-6.6304l-67.8656-67.8656a31.8208 31.8208 0 0 0-22.6304-9.3696 31.8208 31.8208 0 0 0-22.6304 9.3696 32.1024 32.1024 0 0 0 0 45.2864l29.2352 29.2352z m320 320.256H349.6448a32.0768 32.0768 0 0 1-29.6192-31.8976v-194.3808a32.1024 32.1024 0 0 1 31.9232-29.6192h320a32.0512 32.0512 0 0 1 32.0256 32v194.3808a32.1024 32.1024 0 0 1-31.9744 29.5168z m-64-192a32.0256 32.0256 0 0 0-32 32v32.0256a32.0256 32.0256 0 0 0 32 32 32.0256 32.0256 0 0 0 32-32v-32.0256a32.0256 32.0256 0 0 0-32.0256-32.0256z m-192 0a32.0256 32.0256 0 0 0-32 32v32.0256a32.0256 32.0256 0 0 0 32 32 32.0256 32.0256 0 0 0 32-32v-32.0256a32.0256 32.0256 0 0 0-32.0256-32.0256z" p-id="8177"></path></svg>
+						<div class="iconTip">Bilibili</div>
 					</a>
 					<a class="iconItem" onclick="" href="mailto:CulipMinecraft@outlook.com">
 						<svg t="1704870588438" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3174" >
@@ -224,6 +240,7 @@
 				<div class="tanChiShe">
 					<img id="tanChiShe" src="./static/svg/snake-Light.svg" alt="Github贪吃蛇">
 				</div>
+				
 			</header>
 
 
@@ -529,18 +546,17 @@
       });
     }
 
-    var interval = setInterval(spawn, 50);
-    setTimeout(function () {
-      clearInterval(interval);
-      setTimeout(function () {
-        container.remove();
-      }, 5000); 
-      }, 5000); 
-    }, duration || 3000);
+		var interval = setInterval(spawn, 50);
+		setTimeout(function () {
+			clearInterval(interval);
+			setTimeout(function () {
+				container.remove();
+			}, 5000);
+		}, duration || 3000);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    var targetLink = Array.from(document.querySelectorAll('a.projectItem.b')).find(function (a) {
+      var targetLink = Array.from(document.querySelectorAll('a.projectItem.b')).find(function (a) {
       var h1 = a.querySelector('h1');
       var img = a.querySelector('img');
       var hitTitle = h1 && h1.textContent && h1.textContent.trim().indexOf('摄影') !== -1;

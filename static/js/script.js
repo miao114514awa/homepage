@@ -249,6 +249,54 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //pop('./static/img/tz.jpg')
 
+    // Site uptime: reads start date from body[data-site-start] (YYYY-MM-DD)
+    (function () {
+        try {
+            var uptimeEl = document.getElementById('site-uptime');
+            if (!uptimeEl) return;
+            var startStr = document.body.getAttribute('data-site-start') || '2023-01-01';
+            var startDate = new Date(startStr + 'T00:00:00');
+            if (isNaN(startDate.getTime())) startDate = new Date('2023-01-01T00:00:00');
+
+            function computeYearsDays(start, now) {
+                var years = now.getFullYear() - start.getFullYear();
+                var anniv = new Date(start);
+                anniv.setFullYear(start.getFullYear() + years);
+                if (anniv > now) {
+                    years -= 1;
+                    anniv.setFullYear(start.getFullYear() + years);
+                }
+                var msPerDay = 1000 * 60 * 60 * 24;
+                var days = Math.floor((now - anniv) / msPerDay);
+                return { years: years, days: days };
+            }
+
+            function updateUptime() {
+                var now = new Date();
+                if (now < startDate) {
+                    uptimeEl.textContent = '本站即将上线';
+                    uptimeEl.title = '上线日期：' + startDate.toLocaleDateString();
+                    return;
+                }
+                var r = computeYearsDays(startDate, now);
+                var years = r.years;
+                var days = r.days;
+                var text = '';
+                if (years > 0) {
+                    text = '运行了' + years + '年' + days + '天';
+                } else {
+                    text = '运行了' + days + '天';
+                }
+                uptimeEl.textContent = text;
+                uptimeEl.title = '自 ' + startDate.toLocaleDateString() + ' 起运营';
+            }
+
+            updateUptime();
+            // 每小时更新一次
+            setInterval(updateUptime, 60 * 60 * 1000);
+        } catch (e) { console.warn('uptime init failed', e); }
+    })();
+
 });
 
 
