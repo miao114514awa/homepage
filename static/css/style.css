@@ -72,7 +72,8 @@ html[data-theme="Dark"] {
     --left_tag_item: linear-gradient(50deg, #1f2327, #000000);
     --card_filter: 0px;
     --back_filter: 0px;
-    --back_filter_color: #000000;
+    /* 使用半透明遮罩，避免完全盖住背景图 */
+    --back_filter_color: rgba(0,0,0,0.45);
     --fill:#ffffff;
 }
 
@@ -153,7 +154,8 @@ body {
     background: var(--back_filter_color);
     backdrop-filter:  blur(var(--back_filter));
     -webkit-backdrop-filter: blur(var(--back_filter));
-    z-index: -99999999;
+    /* 放在背景之上、内容之下：0 正好在 body::before(-1) 之上，.culip-main 等相对元素为 z-index:1 */
+    z-index: 0;
    
 }
 
@@ -738,8 +740,9 @@ footer {
 
 .tc {
     position: fixed;
-   
-    display: flex;
+
+    /* 初始不渲染以避免影响任何测量/布局（显示由 .tc.active 控制） */
+    display: none;
     visibility: hidden;
     width: 100vw;
     height: 100vh;
@@ -751,39 +754,53 @@ footer {
     top: 0;
     justify-content: center;
     flex-direction: column;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 220ms ease;
+}
+
+.tc.active {
+    display: flex;
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
 }
 
 .tc-main {
     z-index: 100000;
-    
     width: 80%;
-    max-width: 300px;
-    min-height: 200px;
+    max-width: 600px;
+    max-height: 80vh;
+    min-height: 120px;
     background-color: #ffffff;
-    border-radius: 15px;
+    border-radius: 12px;
 
     display: flex;
-    transition: transform 0.2s linear;
+    transition: transform 260ms cubic-bezier(.2,.9,.2,1), opacity 200ms ease;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-    transform: translateY(30%) scale(0.5);
-
-}
-
-.tc-img {
-    width: 100%;
-    height: 100%;
-}
-
-.tc.active {
-    visibility: visible;
+    overflow: auto;
+    transform: translateY(10px) scale(0.96);
+    opacity: 0;
+    will-change: transform, opacity;
 }
 
 .tc-main.active {
-
     transform: translateY(0) scale(1);
+    opacity: 1;
+}
 
+.tc-img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+/* 当弹窗激活时阻止 body 滚动 */
+body.tc-open {
+    overflow: hidden;
 }
 
 

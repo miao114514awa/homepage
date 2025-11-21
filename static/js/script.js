@@ -33,20 +33,91 @@ function toggleClass(selector, className) {
 
 function pop(imageURL) {
     var tcMainElement = document.querySelector(".tc-img");
-    if (imageURL) {
-        tcMainElement.src = imageURL;
+    if (imageURL && tcMainElement) {
+        try { tcMainElement.src = imageURL; } catch (e) {}
     }
+
+    // 如果页面没有 .tc 或 .tc-main，直接返回
+    var hasTc = document.querySelectorAll('.tc').length > 0;
+    var hasTcMain = document.querySelectorAll('.tc-main').length > 0;
+    if (!hasTc && !hasTcMain) return;
+
     toggleClass(".tc-main", "active");
     toggleClass(".tc", "active");
+    try { document.body.classList.toggle('tc-open'); } catch(e) {}
 }
 
-var tc = document.getElementsByClassName('tc');
-var tc_main = document.getElementsByClassName('tc-main');
-tc[0].addEventListener('click', function (event) {
-    pop();
+function pop(imageURL) {
+    var tc = document.querySelector('.tc');
+    var tcMain = document.querySelector('.tc-main');
+    var tcImg = document.querySelector('.tc-img');
+
+    if (!tc || !tcMain) return;
+
+    // 设置图片（如果提供）
+    if (imageURL && tcImg) {
+        try { tcImg.src = imageURL; } catch (e) {}
+    }
+
+    // 如果已经打开，则执行关闭流程（先做出场动画，再彻底隐藏）
+    if (tc.classList.contains('active')) {
+        // 触发出场动画：移除 modal card 的 active 状态
+        tcMain.classList.remove('active');
+
+        // 在 modal card 动画结束时，彻底移除 overlay 的 active 状态并清理资源
+        var onEnd = function (ev) {
+            // 仅在 transform 或 opacity 过渡结束时处理
+            if (ev && ev.propertyName && !(ev.propertyName.indexOf('transform') >= 0 || ev.propertyName.indexOf('opacity') >= 0)) return;
+            tc.classList.remove('active');
+            try { document.body.classList.remove('tc-open'); } catch (e) {}
+            if (tcImg) {
+                try { tcImg.src = ''; } catch (e) {}
+            }
+            tcMain.removeEventListener('transitionend', onEnd);
+        };
+
+        tcMain.addEventListener('transitionend', onEnd);
+        return;
+    }
+
+    // 打开流程：先显示 overlay，再触发卡片入场动画
+    tc.classList.add('active');
+    try { document.body.classList.add('tc-open'); } catch (e) {}
+
+    // 两次 rAF 确保浏览器完成布局，然后触发过渡
+    requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+            tcMain.classList.add('active');
+        });
+    });
+}
+
+// 点击 overlay 时关闭弹窗；点击卡片内部不关闭（阻止冒泡）
+document.addEventListener('click', function (e) {
+    var tc = document.querySelector('.tc');
+    var tcMain = document.querySelector('.tc-main');
+    if (!tc || !tcMain) return;
+
+    if (tc.contains(e.target) && !tcMain.contains(e.target)) {
+        // 点击到 overlay 区域
+        pop();
+    }
 });
-tc_main[0].addEventListener('click', function (event) {
-    event.stopPropagation();
+
+// 阻止卡片内部点击冒泡（已在全局监听中做了判定，但保留以防外部脚本改变结构）
+document.addEventListener('click', function (e) {
+    var tcMain = document.querySelector('.tc-main');
+    if (tcMain && tcMain.contains(e.target)) {
+        e.stopPropagation();
+    }
+}, true);
+
+// 使用 Esc 快捷键关闭弹窗
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+        var tc = document.querySelector('.tc');
+        if (tc && tc.classList.contains('active')) pop();
+    }
 });
 
 
@@ -76,50 +147,58 @@ function getCookie(name) {
     return null;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
 
     var html = document.querySelector('html');
-    var themeState = getCookie("themeState") || "Light";
     var tanChiShe = document.getElementById("tanChiShe");
 
-    function changeTheme(theme) {
-        tanChiShe.src = "./static/svg/snake-" + theme + ".svg";
-        html.dataset.theme = theme;
+    // 获取用户偏好：'auto'（默认） | 'Light' | 'Dark'
+    var userPref = localStorage.getItem('themePreference') || 'auto';
+
+    function detectByBeijingTime() {
+        var d = new Date();
+        var utcHour = d.getUTCHours();
+        var beijingHour = (utcHour + 8) % 24; // 北京时间 = UTC + 8
+        return (beijingHour >= 6 && beijingHour < 18) ? 'Light' : 'Dark';
+    }
+
+    function changeTheme(theme, savePreference) {
+        if (tanChiShe) tanChiShe.src = "./static/svg/snake-" + theme + ".svg";
+        if (html) html.dataset.theme = theme;
         setCookie("themeState", theme, 365);
-        themeState = theme;
-    }
 
-    var Checkbox = document.getElementById('myonoffswitch')
-    Checkbox.addEventListener('change', function () {
-        if (themeState == "Dark") {
-            changeTheme("Light");
-        } else if (themeState == "Light") {
-            changeTheme("Dark");
+        // 同步 body 的 dark-mode 类和开关状态
+        var cb = document.getElementById('myonoffswitch');
+        if (theme === 'Dark') {
+            document.body.classList.add('dark-mode');
+            if (cb) cb.checked = false;
         } else {
-            changeTheme("Dark");
+            document.body.classList.remove('dark-mode');
+            if (cb) cb.checked = true;
         }
-    });
 
-    if (themeState == "Dark") {
-        Checkbox.checked = false;
+        if (savePreference === true) {
+            // 手动更改时保存到 localStorage（覆盖自动）
+            localStorage.setItem('themePreference', theme);
+            userPref = theme;
+        }
     }
 
-    changeTheme(themeState);
+    // 决定要应用的主题：优先用户手动偏好，否则按北京时间自动判断
+    var appliedTheme = (userPref === 'auto') ? detectByBeijingTime() : userPref;
 
+    // 开关切换：作为手动更改，保存到 localStorage
+    var Checkbox = document.getElementById('myonoffswitch');
+    if (Checkbox) {
+        // 初始化开关状态
+        Checkbox.checked = (appliedTheme === 'Light');
+        Checkbox.addEventListener('change', function () {
+            var newTheme = this.checked ? 'Light' : 'Dark';
+            changeTheme(newTheme, true);
+        });
+    }
+
+    changeTheme(appliedTheme, false);
     var fpsElement = document.createElement('div');
     fpsElement.id = 'fps';
     fpsElement.style.zIndex = '10000';
@@ -177,8 +256,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var pageLoading = document.querySelector("#zyyo-loading");
 window.addEventListener('load', function() {
-    setTimeout(function () {
-        pageLoading.style.opacity = '0';
+    setTimeout(function() {
+        if (pageLoading) {
+            try { pageLoading.style.opacity = '0'; } catch(e) {}
+        }
     }, 100);
 });
 
