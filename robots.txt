@@ -2,3 +2,4 @@
 User-agent: *
 Disallow: /static/
 Disallow: /.codebuddy/
+Disallow: /f201e538babab7484804e475d428de9f.txt
