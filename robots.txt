@@ -4,3 +4,4 @@ Disallow: /static/
 Disallow: /.codebuddy/
 Disallow: /f201e538babab7484804e475d428de9f.txt
 Disallow: /sogousiteverification.txt
+Disallow: /baidu_verify_codeva-1HJdq93fNZ.html
